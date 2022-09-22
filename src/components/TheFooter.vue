@@ -1,5 +1,7 @@
 <template>
-  <p>Footer</p>
+  <footer>
+    <p>Ranek. Alguns direitos reservados.</p>
+  </footer>
 </template>
 
 <script>
@@ -8,4 +10,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+footer {
+  background: #87f;
+  padding: 25px 0;
+  text-align: 0;
+  font-size: 1.2rem;
+  color: #fff;
+  position: relative;
+  top: 75px;
+}
+</style>
