@@ -2,17 +2,23 @@
   <section>
     <div v-if="vendas">
       <h2>Vendas</h2>
-      <div class="produtos-wrapper" v-for="(venda, index) in vendas" :key="index">
+      <div
+        class="produtos-wrapper"
+        v-for="(venda, index) in vendas"
+        :key="index"
+      >
         <ProdutoItem v-if="venda.produto" :produto="venda.produto">
           <p class="vendedor">
             <span>Comprador:</span>
-            {{venda.comprador_id}}
+            {{ venda.comprador_id }}
           </p>
         </ProdutoItem>
         <div class="entrega">
           <h3>Entrega:</h3>
           <ul v-if="venda.endereco">
-            <li v-for="(value, key) in venda.endereco" :key="key">{{key}}: {{value}}</li>
+            <li v-for="(value, key) in venda.endereco" :key="key">
+              {{ key }}: {{ value }}
+            </li>
           </ul>
         </div>
       </div>
@@ -27,33 +33,33 @@ import { mapState } from "vuex";
 
 export default {
   components: {
-    ProdutoItem
+    ProdutoItem,
   },
   data() {
     return {
-      vendas: null
+      vendas: null,
     };
   },
   computed: {
-    ...mapState(["usuario", "login"])
+    ...mapState(["usuario", "login"]),
   },
   methods: {
     getVendas() {
-      api.get(`/transacao?vendedor_id=${this.usuario.id}`).then(response => {
+      api.get(`/transacao?vendedor_id=${this.usuario.id}`).then((response) => {
         this.vendas = response.data;
       });
-    }
+    },
   },
   watch: {
     login() {
       this.getVendas();
-    }
+    },
   },
   created() {
     if (this.login) {
       this.getVendas();
     }
-  }
+  },
 };
 </script>
 
@@ -80,5 +86,15 @@ h2 {
 h3 {
   margin: 0px;
   justify-self: end;
+}
+
+@media screen and (max-width: 500px) {
+  .entrega {
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+  }
+  h3 {
+    justify-self: start;
+  }
 }
 </style>

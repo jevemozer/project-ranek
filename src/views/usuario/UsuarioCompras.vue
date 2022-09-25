@@ -2,11 +2,15 @@
   <section>
     <div v-if="compras">
       <h2>Compras</h2>
-      <div class="produtos-wrapper" v-for="(compra, index) in compras" :key="index">
+      <div
+        class="produtos-wrapper"
+        v-for="(compra, index) in compras"
+        :key="index"
+      >
         <ProdutoItem v-if="compra.produto" :produto="compra.produto">
           <p class="vendedor">
             <span>Vendedor:</span>
-            {{compra.vendedor_id}}
+            {{ compra.vendedor_id }}
           </p>
         </ProdutoItem>
       </div>
@@ -21,33 +25,33 @@ import { mapState } from "vuex";
 
 export default {
   components: {
-    ProdutoItem
+    ProdutoItem,
   },
   data() {
     return {
-      compras: null
+      compras: null,
     };
   },
   computed: {
-    ...mapState(["usuario", "login"])
+    ...mapState(["usuario", "login"]),
   },
   methods: {
     getCompras() {
-      api.get(`/transacao?comprador_id=${this.usuario.id}`).then(response => {
+      api.get(`/transacao?tipo=comprador_id`).then((response) => {
         this.compras = response.data;
       });
-    }
+    },
   },
   watch: {
     login() {
       this.getCompras();
-    }
+    },
   },
   created() {
     if (this.login) {
       this.getCompras();
     }
-  }
+  },
 };
 </script>
 
