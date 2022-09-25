@@ -20,12 +20,12 @@ export default {
   components: {
     UsuarioForm,
   },
+  props: ["produto"],
   data() {
     return {
       erros: [],
     };
   },
-  props: ["produto"],
   computed: {
     ...mapState(["usuario"]),
     compra() {

@@ -15,6 +15,7 @@
         </ProdutoItem>
       </div>
     </div>
+    <pagina-carregando v-else />
   </section>
 </template>
 
