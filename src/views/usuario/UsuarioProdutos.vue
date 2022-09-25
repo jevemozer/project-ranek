@@ -1,13 +1,15 @@
 <template>
   <section>
     <h2>Adicionar Produto</h2>
-    <ProdutoAdicionar/>
+    <ProdutoAdicionar />
     <h2>Seus Produtos</h2>
     <transition-group v-if="usuario_produtos" name="list" tag="ul">
       <li v-for="(produto, index) in usuario_produtos" :key="index">
         <ProdutoItem :produto="produto">
-          <p>{{produto.descricao}}</p>
-          <button class="deletar" @click="deletarProduto(produto.id)">Deletar</button>
+          <p>{{ produto.descricao }}</p>
+          <button class="deletar" @click="deletarProduto(produto.id)">
+            Deletar
+          </button>
         </ProdutoItem>
       </li>
     </transition-group>
@@ -24,10 +26,10 @@ export default {
   name: "UsuarioProdutos",
   components: {
     ProdutoAdicionar,
-    ProdutoItem
+    ProdutoItem,
   },
   computed: {
-    ...mapState(["login", "usuario", "usuario_produtos"])
+    ...mapState(["login", "usuario", "usuario_produtos"]),
   },
   methods: {
     ...mapActions(["getUsuarioProdutos"]),
@@ -39,22 +41,23 @@ export default {
           .then(() => {
             this.getUsuarioProdutos();
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error.reponse);
           });
       }
-    }
+    },
   },
   watch: {
     login() {
       this.getUsuarioProdutos();
-    }
+    },
   },
   created() {
     if (this.login) {
       this.getUsuarioProdutos();
     }
-  }
+    document.title = "Usuário";
+  },
 };
 </script>
 
